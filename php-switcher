@@ -1,0 +1,18 @@
+#!/bin/bash
+
+PHP_VERSION=$1
+
+if [ -z "$PHP_VERSION" ]; then
+    echo "Usage: $0 <php version>"
+    exit 1
+fi
+if [ ! -f "/usr/bin/php${PHP_VERSION}" ] && [ ! -f "/usr/bin/php${PHP_VERSION}.0" ]; then
+    echo "PHP version ${PHP_VERSION} not found"
+    exit 1
+fi
+
+sudo rm -f /usr/bin/php
+sudo ln -s /usr/bin/php${PHP_VERSION} /usr/bin/php
+
+echo "Switched to PHP version ${PHP_VERSION}"
+
